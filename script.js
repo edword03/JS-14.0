@@ -2,7 +2,7 @@ let money = 150000;
 let income = 'freelance';
 let addExpenses = 'Еда, Жилье, ТелеФон, интЕрнет';
 let deposit = true;
-let mission = 1000000;
+let mission = 1500000;
 let period = 12,
     budgetDay = money / 30;
     
