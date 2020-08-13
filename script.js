@@ -42,7 +42,7 @@ let getExpensesMonth = function() {
         } while (!isNumber(sum) && sum != null && sum != '' && sum != isNaN )
     }
     console.log(expenses);
-    return sum;
+    return sum += sum;
 };
 
 let expensesAmount = getExpensesMonth();
@@ -60,7 +60,7 @@ let getTargetMonth = function(){
     if (sum < 0) {
         console.log('Цель достигнута не будет');
     } else {
-        console.log('срок достижения цели:', sum);
+        console.log('срок достижения цели:', sum + ' месяцев');
     }
     return sum;
 }
