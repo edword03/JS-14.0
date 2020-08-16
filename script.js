@@ -32,8 +32,8 @@ let appData = {
             ask = prompt('Введите обязательную статью расходов?','еда');
             
             do {
-                sum = +prompt('Во сколько это обойдется?');
-            } while (!sum != null && !sum != '' && !sum != isNaN )
+                sum = prompt('Во сколько это обойдется?');
+            } while (!isNumber(sum))
             appData.expenses[ask] = sum;
         }
     },
@@ -44,7 +44,7 @@ let appData = {
     getExpensesMonth: function() {
         let sum = 0;
         for (let key in appData.expenses) {
-            sum += appData.expenses[key];
+            sum += +appData.expenses[key];
         }
         appData.expensesMonth = sum;
         // console.log(sum);
@@ -69,9 +69,9 @@ let appData = {
             return('У вас высокий уровень дохода');
         } else if (appData.budgetDay >= 600 && appData.budgetDay < 1200) {
             return('У вас средний уровень дохода');
-        } else if (appData.budgetDay < 600) {
+        } else if (appData.budgetDay < 600 && appData.budgetDay >= 0) {
             return('К сожалению у вас уровень дохода ниже среднего');
-        } else if (appData.budgetDay < 0) {
+        } else {
             return('Что-то пошло не так');
         }
     }
