@@ -26,7 +26,7 @@ let appData = {
         appData.addExpenses = appData.addExpenses.toLowerCase().split(',');
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
-        let sum,
+        let sum = 0,
             ask;
         for (let i = 0; i < 2; i++) {
             ask = prompt('Введите обязательную статью расходов?','еда');
@@ -34,10 +34,11 @@ let appData = {
             do {
                 sum = prompt('Во сколько это обойдется?');
             } while (!isNumber(sum))
-            appData.expenses[ask] = sum;
+            appData.expenses[ask] = +sum;
         }
+        return sum;
     },
-    budget: money,
+    budget: +money,
     budgetDay: 0,
     budgetMonth: 0,
     expensesMonth: 0,
@@ -51,8 +52,8 @@ let appData = {
         return sum;
     },
     getBudget: function(){
-        appData.budgetMonth = Math.round(appData.budget - appData.expensesMonth);
-        appData.budgetDay = Math.round(appData.budgetMonth / 30);
+        appData.budgetMonth = Math.ceil(appData.budget - appData.expensesMonth);
+        appData.budgetDay = Math.floor(appData.budgetMonth / 30);
     },
     getTargetMonth: function(){
         const sum = (Math.ceil(appData.mission / appData.budgetMonth));
