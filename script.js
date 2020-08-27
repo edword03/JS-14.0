@@ -87,6 +87,22 @@ let appData = {
 
       titlePeriodAmount.textContent = '1';
       periodSelect.value = 1;
+      appData.addExpenses.length = 0;
+      appData.addIncome.length = 0;
+
+        appData.income = {};
+        appData.addIncome = [];
+        appData.incomeMonth = 0;
+        appData.expenses = {};
+        appData.addExpenses = [];
+        appData.percentDeposit = 0;
+        appData.moneyDeposit = 0;
+        appData.budget = 0;
+        appData.budgetDay = 0;
+        appData.budgetMonth = 0;
+        appData.expensesMonth = 0;
+        periodSelect.removeEventListener('input', appData.showResult.bind(appData));
+
     },
     showResult: function() {
         budgetMonthValue[0].value = this.budgetMonth;
@@ -183,11 +199,11 @@ let appData = {
     getTargetMonth: function(){
         const sum = (Math.ceil(targetAmount.value / this.budgetMonth));
     
-        if (sum < 0) {
-            console.log('Цель достигнута не будет');
-        } else {
-            console.log('срок достижения цели:', sum + ' месяцев');
-        }
+        // if (sum < 0) {
+        //     console.log('Цель достигнута не будет');
+        // } else {
+        //     console.log('срок достижения цели:', sum + ' месяцев');
+        // }
         return sum;
     },
     getStatusIncome: function(){
