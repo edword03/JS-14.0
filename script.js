@@ -11,7 +11,7 @@ const startId = document.getElementById('start'),
       expensesMonthValue = document.getElementsByClassName('expenses_month-value'),
       additionalIncomeValue = document.getElementsByClassName('additional_income-value'),
       additionalExpensesValue = document.getElementsByClassName('additional_expenses-value'),
-      incomePeriodValue = document.getElementsByClassName('income_period-value'),
+      incomePeriodValue = document.querySelector('.income_period-value'),
       targetMonthValue = document.getElementsByClassName('target_month-value'),
       salaryAmount = document.querySelector('.salary-amount'),
       incomeTitle = document.querySelectorAll('.income-title'),
@@ -101,7 +101,6 @@ let appData = {
         appData.budgetDay = 0;
         appData.budgetMonth = 0;
         appData.expensesMonth = 0;
-        periodSelect.removeEventListener('input', appData.showResult.bind(appData));
 
     },
     showResult: function() {
@@ -111,8 +110,11 @@ let appData = {
         additionalExpensesValue[0].value = this.addExpenses.join(',  ');
         additionalIncomeValue[0].value = this.addIncome.join(',  ');
         targetMonthValue[0].value = this.getTargetMonth();
-        incomePeriodValue[0].value = this.calcSavedMoney();
-        periodSelect.addEventListener('input', appData.showResult.bind(appData));
+        incomePeriodValue.value = this.calcSavedMoney();
+
+        periodSelect.addEventListener('change', function(){
+          incomePeriodValue.value = appData.calcSavedMoney();
+        });
         
     },
     addExpensesBlock: function(){
