@@ -87,6 +87,27 @@ class AppData {
   
     titlePeriodAmount.textContent = '1';
     periodSelect.value = 1;
+
+    expensesItems = document.querySelectorAll('.expenses-items');
+      if(expensesItems.length > 1) {
+        for(let i = expensesItems.length - 1; i >= 1; i--){
+          if(expensesItems[i].parentNode) {
+            expensesItems[i].parentNode.removeChild(expensesItems[i]);
+          }
+        }
+      }
+
+     btnPlus2.style.display = 'block';
+
+     incomeItems = document.querySelectorAll('.income-items');
+        if(expensesItems.length > 1) {
+          for(let i = incomeItems.length - 1; i >= 1; i--){
+            if(incomeItems[i].parentNode){
+              incomeItems[i].parentNode.removeChild(incomeItems[i]);
+            }
+          }
+        }
+      btnPlus1.style.display = 'block';
   }
 
   showResult() {
