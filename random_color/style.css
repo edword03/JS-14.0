@@ -1,0 +1,30 @@
+.wrapper{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: auto;
+  max-width: 1024px;
+  margin-top: 125px;
+}
+
+#color-text {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+#change{
+  font-weight: bold;
+  outline: none;
+  display: block;
+  border: none;
+  border-color: none;
+  padding: 15px;
+  border-radius: 0;
+  overflow: hidden;
+}
+#change:hover{
+  cursor: pointer;
+}
