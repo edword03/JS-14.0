@@ -22,8 +22,7 @@ const startId = document.getElementById('start'),
       targetAmount = document.querySelector('.target-amount'),
       periodSelect = document.querySelector('.period-select'),
       titlePeriodAmount = document.querySelector('.period-amount'),
-      placeholderName = document.querySelectorAll('[ placeholder="Наименование"]'),
-      placeholderSum = document.querySelectorAll('[placeholder="Сумма"]');
+      data = document.querySelector('.data');
 
 const isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -75,7 +74,7 @@ let appData = {
         expensesItems[0].parentNode.insertBefore(cloneExpensesItem, btnPlus2);
   
         expensesItems = document.querySelectorAll('.expenses-items');
-
+  
         if (expensesItems.length === 3) {
             btnPlus2.style.display = 'none';
         }
@@ -184,16 +183,6 @@ let appData = {
     calcSavedMoney: function() {
        return appData.budgetMonth * periodSelect.value;
     },
-    validInputName: function (el) {
-      el.addEventListener('input', () => {
-        el.value = el.value.replace(/[a-z0-9]/gi, '');
-      });
-    },
-    validInputSum: function (el) {
-      el.addEventListener('input', () => {
-        el.value = el.value.replace(/[^\d]/gi, '');
-      });
-    }
     
 };
     
@@ -205,16 +194,18 @@ btnPlus1.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', function(){
     titlePeriodAmount.textContent = periodSelect.value;
 });
-placeholderName.forEach(function (item) {
-  item.addEventListener('input', () => {
-    item.value = item.value.replace(/[a-z0-9]/gi, '');
-  });
+
+data.addEventListener('input', (event) => {
+  let target = event.target;
+
+  if (target.matches('[placeholder="Наименование"]')) {
+    target.value = target.value.replace(/[^А-я.,?!:;-\s]/g, '');
+  }
+  if (target.matches('[placeholder="Сумма"]')) {
+    target.value = target.value.replace(/[^\d]/g, '');
+  }
 });
-placeholderSum.forEach((item) => {
-  item.addEventListener('input', () => {
-    item.value = item.value.replace(/[^\d]/gi, '');
-  });
-});
+
 salaryAmount.addEventListener('input', function(){
     if (salaryAmount.value !== '') {
         startId.disabled = false;
