@@ -27,7 +27,8 @@ const startId = document.getElementById('start'),
     cancel = document.querySelector('#cancel'),
     depositBank = document.querySelector('.deposit-bank'),
     depositAmount = document.querySelector('.deposit-amount'),
-    depositPercent = document.querySelector('.deposit-percent');
+    depositPercent = document.querySelector('.deposit-percent'),
+    data = document.querySelector('.data');
 
 
 const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
@@ -70,7 +71,6 @@ class AppData {
 
         const inputs = document.querySelectorAll('.data input[type=text]');
         inputs.forEach(item => item.disabled = true);
-
     }
 
     reset() {
@@ -138,13 +138,12 @@ class AppData {
         additionalIncomeValue[0].value = this.addIncome.join(',  ');
         targetMonthValue[0].value = this.getTargetMonth();
         incomePeriodValue[0].value = this.calcSavedMoney();
-        periodSelect.addEventListener('change', () => {
-            incomePeriodValue.value = this.calcSavedMoney();
-        });
     }
 
     addExpensesBlock() {
         const cloneExpensesItem = expensesItems[0].cloneNode(true);
+        cloneExpensesItem.querySelector('.expenses-name').value = '';
+        cloneExpensesItem.querySelector('.expenses-amount').value = '';
         expensesItems[0].parentNode.insertBefore(cloneExpensesItem, btnPlus2);
         expensesItems = document.querySelectorAll('.expenses-items');
 
@@ -155,6 +154,8 @@ class AppData {
 
     addIncomeBlock() {
         const incomeItemsClone = incomeItems[0].cloneNode(true);
+        incomeItemsClone.querySelector('.income-title').value = '';
+        incomeItemsClone.querySelector('.income-amount').value = '';
         incomeItems[0].parentNode.insertBefore(incomeItemsClone, btnPlus1);
         incomeItems = document.querySelectorAll('.income-items');
 
@@ -314,30 +315,23 @@ class AppData {
         cancel.addEventListener('click', this.reset.bind(this));
 
         depositCheck.addEventListener('click', this.depositHandler.bind(this));
+        data.addEventListener('input', (event) => {
+          let target = event.target;
+        
+          if (target.matches('[placeholder="Наименование"]')) {
+            target.value = target.value.replace(/[^А-я.,?!:;-\s]/g, '');
+          }
+          if (target.matches('[placeholder="Сумма"]')) {
+            target.value = target.value.replace(/[^\d]/g, '');
+          }
+        });
+
+        periodSelect.addEventListener('change', () => {
+          incomePeriodValue.value = this.calcSavedMoney();
+        });
     }
 }
 
 const appData = new AppData();
 
 appData.addEventListeners();
-// for(let key in appData) {
-//     if (typeof(appData[key]) === 'object'){
-//             for (let i in appData[key]) {
-//               console.log(`Наша программа включает в себя данные: ${i} : ${appData[key][i]}`);
-//             }
-//     } else {
-//         console.log(`Наша программа включает в себя данные: ${key} : ${appData[key]}`);
-//     }
-// }
-
-// let words = appData.addExpenses.join(',');
-
-// const solution = function(text) {
-// let str = '';
-//   for (let i = 0; i <= text.length - 1; i+=1 ) {
-//     if (text[i - 1] == 0 || text[i - 1] === undefined) {
-//      str += text[i].toUpperCase();
-//     } else str += text[i];
-//   }
-//   return str;
-// };
